@@ -14,7 +14,8 @@ def create
   end
 
 def email
-  UserMailer.order_receipt_email.deliver_now
+  order = Order.find(1)
+  UserMailer.order_receipt_email(order).deliver_now
   render nothing: true
 end
 

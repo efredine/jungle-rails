@@ -7,7 +7,8 @@ class UserMailer < ApplicationMailer
          content_type: "text/html")
   end
 
-  def order_receipt_email
-    mail(to: 'user@somewhere.com', subject: 'Welcome to My Awesome Site')
+  def order_receipt_email(order)
+    @order = order
+    mail(to: @order.email, subject: "Confirmation for Order #{@order.id}")
   end
 end

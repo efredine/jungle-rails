@@ -2,3 +2,11 @@ Thank you for your order.
 
 Order#<%= @order.id %>
 ===============================================
+<% @order.line_items.each do |i| %>
+<%= i.quantity %> <%= i.product.name %> @ <%= humanized_money_with_symbol i.item_price %> each
+SUBTOTAL: <%= humanized_money_with_symbol i.total_price %>
+
+<% end %>
+------------------------------------------------
+TOTAL: <%= humanized_money_with_symbol @order.total %>
+------------------------------------------------

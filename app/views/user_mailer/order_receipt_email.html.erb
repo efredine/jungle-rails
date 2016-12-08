@@ -5,7 +5,18 @@
   </head>
   <body>
     <p>Thank you for your order.</p>
-    <h1>Order #<%=@order.id %></h1>
-    <p>We got your order dude.</p>
+    <h2>Order #<%=@order.id %></h2>
+    <hr>
+    <% @order.line_items.each do |i| %>
+      <p>
+       <%= i.quantity %>
+        <%= i.product.name %> @
+       <%= humanized_money_with_symbol i.item_price %> each<br>
+       SUBTOTAL: <%= humanized_money_with_symbol i.total_price %>
+      </p>
+    <% end %>
+    <hr>
+    <p>TOTAL: <%= humanized_money_with_symbol @order.total %></p>
+    <hr>
   </body>
 </html>

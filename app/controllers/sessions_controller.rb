@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
       redirect_to '/'
     else
     # If user's login doesn't work, send them back to the login form.
+      flash[:error] = "User name or password didn't match."
       redirect_to '/login'
     end
   end

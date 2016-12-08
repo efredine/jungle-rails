@@ -14,7 +14,7 @@ def create
   end
 
 def email
-  UserMailer.welcome_email.deliver_now
+  UserMailer.order_receipt_email.deliver_now
   render nothing: true
 end
 

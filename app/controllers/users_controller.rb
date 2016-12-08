@@ -13,6 +13,11 @@ def create
     end
   end
 
+def email
+  UserMailer.welcome_email.deliver_now
+  render nothing: true
+end
+
 private
 
   def user_params

@@ -35,7 +35,7 @@ puts "Re-creating Products ..."
 
 Product.destroy_all
 
-cat1.products.create!({
+product1 = cat1.products.create!({
   name:  'Men\'s Classy shirt',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel1.jpg'),
@@ -43,7 +43,7 @@ cat1.products.create!({
   price: 64.99
 })
 
-cat1.products.create!({
+product2 = cat1.products.create!({
   name:  'Women\'s Zebra pants',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel2.jpg'),
@@ -51,7 +51,7 @@ cat1.products.create!({
   price: 124.99
 })
 
-cat1.products.create!({
+product3 = cat1.products.create!({
   name:  'Hipster Hat',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel3.jpg'),
@@ -130,6 +130,49 @@ cat3.products.create!({
   image: open_asset('furniture3.jpg'),
   quantity: 23,
   price: 2_483.75
+})
+
+## REVIEWS and USERS
+
+puts "Re-creating reviews and users"
+
+Review.destroy_all
+User.destroy_all
+
+user1 = User.create!(
+  first_name: "user",
+  last_name: "one",
+  email: "user1@email.com",
+  password: "hello",
+  password_confirmation: "hello"
+)
+
+user2 = User.create!(
+  first_name: "user",
+  last_name: "two",
+  email: "user2@email.com",
+  password: "hello",
+  password_confirmation: "hello"
+)
+
+user3 = User.create!(
+  first_name: "user",
+  last_name: "three",
+  email: "user3@email.com",
+  password: "hello",
+  password_confirmation: "hello"
+)
+
+product1.reviews.create!({
+  user: user1,
+  description: "This product sucks.",
+  rating: 1
+})
+
+product1.reviews.create!({
+  user: user2,
+  description: "This product rocks!",
+  rating: 5
 })
 
 

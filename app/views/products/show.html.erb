@@ -26,6 +26,30 @@
       </div>
     </div>
 
+  <div class="panel panel-default">
+    <div class="panel-heading">Reviews</div>
+    <div class="panel-body">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Rating</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @product.reviews.each do |review| %>
+            <tr>
+              <td><%= review.user.first_name %> <%= review.user.last_name %></td>
+              <td><%= review.rating %></td>
+              <td><%= review.description %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
   </article>
 
 </section>

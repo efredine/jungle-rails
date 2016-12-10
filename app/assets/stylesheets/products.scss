@@ -86,7 +86,24 @@ main section.products-show {
       max-width: 100%;
       padding-bottom: 20px;
     }
+    .product-reviews {
+      .number-thingy {
+        input {
+          width: 60px;
+        }
+      }
+      .description {
+        textarea {
+          width: 500px;
+        }
+      }
+    }
   }
 }
+
+input#review-rating.form-control.input-sm {
+  width: 50px;
+}
+
 
 

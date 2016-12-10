@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @product.reviews.each do |review| %>
+          <% @product.reviews.order(updated_at: :desc).each do |review| %>
             <%= render 'reviews/review', review: review %>
           <% end %>
         </tbody>

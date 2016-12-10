@@ -1,0 +1,10 @@
+<tr>
+  <td><%= review.user.first_name %> <%= review.user.last_name %></td>
+  <td><%= review.rating %></td>
+  <td><%= review.description %></td>
+  <td>
+    <% if review.user.id == current_user.id %>
+      <%= link_to fa_icon('trash'), [@product, review], class: 'btn btn-sm btn-danger', method: :delete %>
+    <% end %>
+  </td>
+</tr>

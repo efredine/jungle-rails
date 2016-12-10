@@ -1,0 +1,27 @@
+<% if current_user %>
+  <div class="form-inline">
+    <%= form_for [@product, @review] do |form| %>
+      <% if flash[:error_messages] %>
+        <div class="alert alert-danger">
+          <strong>The following errors prevented saving:</strong>
+          <ul>
+            <% flash[:error_messages].each do |error| %>
+              <li><%= error %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= form.label :rating %>
+        <%= form.number_field(:rating, class: 'form-control')  %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description %>
+        <%= form.text_field :description, class: 'form-control' %>
+      </div>
+      <%= form.submit 'Create Review', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% else %>
+  <p><%= link_to 'Login', '/login' %>  to leave a review.</p>
+<% end %>

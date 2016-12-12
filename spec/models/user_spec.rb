@@ -98,8 +98,51 @@ RSpec.describe User, type: :model do
 
     it "should authenticate with correct email and password" do
       authenticated_user = User.authenticate_with_credentials("user@email.com", "password")
-      puts user.inspect, authenticated_user.inspect
       expect(authenticated_user).to eq(user)
+    end
+
+    it "should not authenticate with invalid email" do
+      authenticated_user = User.authenticate_with_credentials("other@email.com", "password")
+      expect(authenticated_user).to be_nil
+    end
+
+    it "should not authenticate with matching email but incorrect password" do
+      authenticated_user = User.authenticate_with_credentials("user@email.com", "wrong")
+      expect(authenticated_user).to be_nil
+    end
+
+    it "should match user provided email with different case" do
+      authenticated_user = User.authenticate_with_credentials("USER@email.com", "password")
+      expect(authenticated_user).to eq(user)
+    end
+
+    it "should match if original email provided by user has different case" do
+      user2 = User.create!(
+        first_name: "first_name",
+        last_name: "last_name",
+        email: "USER2@email.com",
+        password: "password",
+        password_confirmation: "password"
+      )
+      authenticated_user = User.authenticate_with_credentials("user2@email.com", "password")
+      expect(authenticated_user).to eq(user2)
+    end
+
+    it "should match if user provided email has extra spaces before or after the email" do
+      authenticated_user = User.authenticate_with_credentials("   user@email.com   ", "password")
+      expect(authenticated_user).to eq(user)
+    end
+
+     it "should match if original email provided by user has space before or after email" do
+      user2 = User.create!(
+        first_name: "first_name",
+        last_name: "last_name",
+        email: "         user2@email.com  ",
+        password: "password",
+        password_confirmation: "password"
+      )
+      authenticated_user = User.authenticate_with_credentials("user2@email.com", "password")
+      expect(authenticated_user).to eq(user2)
     end
 
   end

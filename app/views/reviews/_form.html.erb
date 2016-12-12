@@ -1,4 +1,4 @@
-<% if current_user %>
+<% if logged_in? %>
   <div class="form-inline">
     <%= form_for [@product, @review] do |form| %>
       <% if flash[:error_messages] %>

@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+
+  describe "Validations" do
+
     let(:user) do
       User.new(
         first_name: "first_name",
@@ -11,8 +14,6 @@ RSpec.describe User, type: :model do
         password_confirmation: "password"
       )
     end
-
-  describe "Validations" do
 
     it "is valid when all data is present" do
       expect(user).to be_valid
@@ -81,7 +82,26 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
       expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
+  end
 
+  describe ".authenticate_with_credentials" do
+
+    let!(:user) do
+      User.create!(
+        first_name: "first_name",
+        last_name: "last_name",
+        email: "user@email.com",
+        password: "password",
+        password_confirmation: "password"
+      )
+    end
+
+    it "should authenticate with correct email and password" do
+      authenticated_user = User.authenticate_with_credentials("user@email.com", "password")
+      puts user.inspect, authenticated_user.inspect
+      expect(authenticated_user).to eq(user)
+    end
 
   end
+
 end

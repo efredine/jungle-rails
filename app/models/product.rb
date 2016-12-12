@@ -15,4 +15,8 @@ class Product < ActiveRecord::Base
     reviews.average(:rating)
   end
 
+  def sold_out?
+    quantity == 0
+  end
+
 end
